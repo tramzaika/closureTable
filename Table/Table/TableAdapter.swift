@@ -11,33 +11,33 @@ import Foundation
 
 class TableAdapter: NSObject, UITableViewDataSource, UITableViewDelegate {
     
-    var completionOne: ((UITableView,Int) -> (Int))
-    var completionTwo: ((UITableView,IndexPath) -> (UITableViewCell))
-    var completionThree: ((UITableView) -> (Int))
+    var numberOfRowsInSectionCompletion: ((UITableView,Int) -> (Int))
+    var cellForRowAtCompletion: ((UITableView,IndexPath) -> (UITableViewCell))
+    var numberOfSectionsCompletion: ((UITableView) -> (Int))
     
     
-    init(completionOne: @escaping (UITableView,Int) -> (Int),
-        completionTwo: @escaping (UITableView,IndexPath) -> (UITableViewCell),
-        completionThree: @escaping (UITableView) -> (Int)) {
+    init(numberOfRowsInSectionCompletion: @escaping (UITableView,Int) -> (Int),
+         cellForRowAtCompletion: @escaping (UITableView,IndexPath) -> (UITableViewCell),
+         numberOfSectionsCompletion: @escaping (UITableView) -> (Int)) {
                
-        self.completionOne = completionOne
-        self.completionTwo = completionTwo
-        self.completionThree = completionThree
+        self.numberOfRowsInSectionCompletion = numberOfRowsInSectionCompletion
+        self.cellForRowAtCompletion = cellForRowAtCompletion
+        self.numberOfSectionsCompletion = numberOfSectionsCompletion
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
                 
-        return completionOne(tableView, section)
+        return numberOfRowsInSectionCompletion(tableView, section)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        return completionTwo(tableView,indexPath)
+        return cellForRowAtCompletion(tableView,indexPath)
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        return completionThree(tableView)
+        return numberOfSectionsCompletion(tableView)
     }
 }
 

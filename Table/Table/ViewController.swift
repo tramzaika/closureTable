@@ -10,13 +10,13 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var tableV: UITableView!
- 
-    let adapter = TableAdapter { (table,  rows) -> (Int) in
+    
+    let adapter = TableAdapter { (_, _) -> (Int) in
         return 6
-    } completionTwo: { (table, indexPath) -> (UITableViewCell) in
-        let cell = table.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
+    } cellForRowAtCompletion: { (table, indexPath) -> (UITableViewCell) in
+    let cell = table.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
         return   cell
-    } completionThree: { (sections) -> (Int) in
+    } numberOfSectionsCompletion: { (_) -> (Int) in
         return 1
     }
 
